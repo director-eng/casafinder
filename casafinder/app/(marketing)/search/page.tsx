@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server'
 import { ListingCard } from '@/components/listings/ListingCard'
 import { ListingFilters } from '@/components/listings/ListingFilters'
 import { SearchMap } from './SearchMap'
+import { SortSelect } from '@/components/ui/sort-select'
 import type { ListingWithImage } from '@/lib/supabase/types'
 
 export const dynamic = 'force-dynamic'
@@ -122,21 +123,12 @@ export default async function SearchPage({
           </div>
 
           {/* Sort */}
-          <form>
-            {Object.entries(params).filter(([k]) => k !== 'sort').map(([k, v]) =>
-              <input key={k} type="hidden" name={k} value={v as string} />
+          <SortSelect
+            defaultValue={params.sort ?? ''}
+            hiddenParams={Object.fromEntries(
+              Object.entries(params).filter(([k]) => k !== 'sort').map(([k, v]) => [k, v as string])
             )}
-            <select
-              name="sort"
-              defaultValue={params.sort ?? ''}
-              onChange={e => (e.target.form as HTMLFormElement).submit()}
-              className="px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#0F5AE5]"
-            >
-              <option value="">Sort: Newest</option>
-              <option value="price_asc">Price: Low to High</option>
-              <option value="price_desc">Price: High to Low</option>
-            </select>
-          </form>
+          />
 
           {/* Result count */}
           <span className="text-sm text-gray-500 ml-auto">

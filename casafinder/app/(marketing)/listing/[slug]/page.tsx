@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 import { ListingGallery } from '@/components/listings/ListingGallery'
 import { LeadForm } from '@/components/forms/LeadForm'
 import { ListingMap } from '@/components/map/ListingMap'
+import { ShareButton } from '@/components/ui/share-button'
 import { listingStructuredData } from '@/lib/seo/structured-data'
 import type { ListingWithImage } from '@/lib/supabase/types'
 
@@ -245,12 +246,7 @@ export default async function ListingPage({ params }: Props) {
             )}
 
             {/* Share */}
-            <button
-              onClick={() => navigator.share?.({ title: listing.title_en ?? listing.title, url: window.location.href })}
-              className="w-full py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-            >
-              Share this listing
-            </button>
+            <ShareButton title={listing.title_en ?? listing.title} />
           </div>
         </div>
       </div>
