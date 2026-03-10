@@ -3,6 +3,7 @@
 import { useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+import Link from 'next/link'
 
 function LoginForm() {
   const router = useRouter()
@@ -121,6 +122,13 @@ export default function LoginPage() {
             <LoginForm />
           </Suspense>
         </div>
+
+        <p className="text-center text-[13px] text-[#7A8494] mt-5">
+          New to CasaFinder?{' '}
+          <Link href="/signup" className="text-[#0F5AE5] font-medium hover:underline">
+            Create a free agent account
+          </Link>
+        </p>
       </div>
     </main>
   )

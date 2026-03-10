@@ -183,13 +183,18 @@ export default async function HomePage() {
           <div>
             <div className="text-white font-semibold mb-3">Agents</div>
             <ul className="space-y-2 text-sm">
+              <li><a href="/signup" className="hover:text-white">List a Property</a></li>
+              <li><a href="/pricing" className="hover:text-white">Pricing</a></li>
               <li><a href="/dashboard" className="hover:text-white">Agent Portal</a></li>
-              <li><a href="/listings/new" className="hover:text-white">List a Property</a></li>
+              <li><a href="/about" className="hover:text-white">About</a></li>
+              <li><a href="/about#contact" className="hover:text-white">Contact</a></li>
             </ul>
           </div>
         </div>
         <div className="max-w-7xl mx-auto mt-8 pt-8 border-t border-gray-800 text-sm text-center">
-          © {new Date().getFullYear()} CasaFinder. All rights reserved.
+          © {new Date().getFullYear()} CasaFinder. All rights reserved. ·{' '}
+          <a href="/about#contact" className="hover:text-white">Contact</a> ·{' '}
+          <a href="/pricing" className="hover:text-white">Pricing</a>
         </div>
       </footer>
     </main>

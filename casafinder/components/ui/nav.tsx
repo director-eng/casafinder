@@ -32,7 +32,7 @@ export function Nav() {
             Sign In
           </Link>
           <Link
-            href="/listings/new"
+            href="/signup"
             className="px-4 py-2 bg-[#0F5AE5] hover:bg-[#0B4CC4] active:bg-[#0A44B0] text-white text-[13px] font-semibold rounded-[9999px] transition-colors duration-[120ms]"
           >
             List a Property
@@ -74,7 +74,7 @@ export function Nav() {
               Sign In
             </Link>
             <Link
-              href="/listings/new"
+              href="/signup"
               className="px-4 py-2 bg-[#0F5AE5] hover:bg-[#0B4CC4] text-white text-[14px] font-semibold rounded-[9999px] text-center transition-colors"
               onClick={() => setMobileOpen(false)}
             >
