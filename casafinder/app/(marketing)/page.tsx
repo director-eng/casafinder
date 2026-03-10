@@ -38,24 +38,24 @@ const regions = [
     name: 'Escazú · Santa Ana',
     sub: 'Central Valley',
     count: 'Coming soon',
-    // Modern urban neighbourhood — San José metro feel
-    img: 'https://images.unsplash.com/photo-1444723121867-7a241cacace9?auto=format&fit=crop&w=600&h=420&q=75',
+    // Central Valley — warm modern neighbourhood, lush green hills
+    img: 'https://images.unsplash.com/photo-1516026672322-bc52d61a53d5?auto=format&fit=crop&w=600&h=420&q=75',
     href: '/search?district=Escazu',
   },
   {
     name: 'La Fortuna',
     sub: 'Northern Zone',
     count: 'Coming soon',
-    // Lush tropical rainforest — Arenal / Northern Zone
-    img: 'https://images.unsplash.com/photo-1542401886-65d4b61ded73?auto=format&fit=crop&w=600&h=420&q=75',
+    // Arenal / Northern Zone — jungle waterfall + tropical green
+    img: 'https://images.unsplash.com/photo-1586348943529-beaae6c28db9?auto=format&fit=crop&w=600&h=420&q=75',
     href: '/search?district=La+Fortuna',
   },
   {
     name: 'Jacó',
     sub: 'Central Pacific',
     count: 'Coming soon',
-    // Central Pacific surf beach with palm-lined shore
-    img: 'https://images.unsplash.com/photo-1468476396571-4d6f2a427ee7?auto=format&fit=crop&w=600&h=420&q=75',
+    // Jacó — Central Pacific surf beach, waves and palm shore
+    img: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=600&h=420&q=75',
     href: '/search?district=Jaco',
   },
 ]
