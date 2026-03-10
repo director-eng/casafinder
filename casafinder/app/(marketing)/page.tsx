@@ -302,38 +302,6 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* ── Explore by Region ─────────────────────────────────────────────── */}
-      <section className="bg-[#F5F7FA] border-y border-[#E5E7EB] py-20 px-6">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="mb-10">
-            <p className="text-[12px] font-semibold text-[#0F5AE5] uppercase tracking-[0.1em] mb-2">Explore</p>
-            <h2 className="text-[2rem] font-bold text-[#1F2937] leading-tight">Explore by region</h2>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {regions.map(({ name, sub, count, img, href }) => (
-              <a
-                key={name}
-                href={href}
-                className="group relative block rounded-[12px] overflow-hidden aspect-[3/4] md:aspect-[4/5] bg-[#E5E7EB]"
-              >
-                <img
-                  src={img}
-                  alt={name}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-3">
-                  <div className="text-white font-semibold text-[13px] leading-tight">{name}</div>
-                  <div className="text-white/65 text-[11px] mt-0.5">{sub}</div>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── Why the Southern Pacific ──────────────────────────────────────── */}
       <section className="max-w-[1280px] mx-auto px-6 py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -363,7 +331,7 @@ export default async function HomePage() {
           {/* Right — stats */}
           <div className="grid grid-cols-2 gap-6">
             {[
-              { stat: '2h', label: 'From San José', detail: 'Via the Costanera Sur highway' },
+              { stat: '4h', label: 'From San José', detail: 'Via the Costanera Sur highway' },
               { stat: '300+', label: 'Days of sun/year', detail: 'Dry season May – December' },
               { stat: '30+', label: 'Restaurants', detail: 'International cuisine in the jungle' },
               { stat: '50km', label: 'Of coastline', detail: 'Ballena National Marine Park' },

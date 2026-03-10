@@ -35,7 +35,7 @@ export function Nav() {
           {/* Logo */}
           <Link
             href="/"
-            className="font-extrabold text-[20px] text-[#1F2937] tracking-tight shrink-0"
+            className="font-extrabold text-[26px] text-[#1F2937] tracking-tight shrink-0"
           >
             Casa<span className="text-[#0F5AE5]">Finder</span>
           </Link>
@@ -52,7 +52,7 @@ export function Nav() {
               <Link
                 key={href}
                 href={href}
-                className="px-3 py-2 text-[13px] font-medium text-[#5B6472] hover:text-[#0F5AE5] rounded-[6px] hover:bg-[#F5F7FA] transition-all duration-[120ms]"
+                className="px-3.5 py-2 text-[15px] font-medium text-[#5B6472] hover:text-[#0F5AE5] rounded-[6px] hover:bg-[#F5F7FA] transition-all duration-[120ms]"
               >
                 {label}
               </Link>
@@ -63,13 +63,13 @@ export function Nav() {
           <div className="hidden md:flex items-center gap-2">
             <Link
               href="/login"
-              className="px-3 py-2 text-[13px] font-medium text-[#5B6472] hover:text-[#0F5AE5] rounded-[6px] hover:bg-[#F5F7FA] transition-all duration-[120ms]"
+              className="px-3.5 py-2 text-[15px] font-medium text-[#5B6472] hover:text-[#0F5AE5] rounded-[6px] hover:bg-[#F5F7FA] transition-all duration-[120ms]"
             >
               Sign In
             </Link>
             <Link
               href="/signup"
-              className="px-5 py-2 bg-[#0F5AE5] hover:bg-[#0B4CC4] active:bg-[#0A44B0] text-white text-[13px] font-semibold rounded-[9999px] transition-colors duration-[120ms] shadow-sm"
+              className="px-5 py-2.5 bg-[#0F5AE5] hover:bg-[#0B4CC4] active:bg-[#0A44B0] text-white text-[14px] font-semibold rounded-[9999px] transition-colors duration-[120ms] shadow-sm"
             >
               List a Property
             </Link>
