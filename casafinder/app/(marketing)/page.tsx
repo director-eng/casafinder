@@ -13,6 +13,7 @@ const regions = [
     name: 'Ojochal · Uvita',
     sub: 'Southern Pacific',
     count: 'Launching here',
+    // Tropical Pacific coast beach — whale tail / Uvita area feel
     img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&h=420&q=75',
     href: '/search?district=Ojochal',
   },
@@ -20,13 +21,15 @@ const regions = [
     name: 'Manuel Antonio',
     sub: 'Pacific Coast',
     count: 'Coming soon',
-    img: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&h=420&q=75',
+    // Lush jungle meets Pacific beach — classic Manuel Antonio
+    img: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=600&h=420&q=75',
     href: '/search?district=Manuel+Antonio',
   },
   {
     name: 'Tamarindo',
     sub: 'Guanacaste',
     count: 'Coming soon',
+    // Pacific beach at sunset — Guanacaste dry-forest coast
     img: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=600&h=420&q=75',
     href: '/search?district=Tamarindo',
   },
@@ -34,21 +37,24 @@ const regions = [
     name: 'Escazú · Santa Ana',
     sub: 'Central Valley',
     count: 'Coming soon',
-    img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=600&h=420&q=75',
+    // Modern urban neighbourhood — San José metro feel
+    img: 'https://images.unsplash.com/photo-1444723121867-7a241cacace9?auto=format&fit=crop&w=600&h=420&q=75',
     href: '/search?district=Escazu',
   },
   {
     name: 'La Fortuna',
     sub: 'Northern Zone',
     count: 'Coming soon',
-    img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=600&h=420&q=75',
+    // Lush tropical rainforest — Arenal / Northern Zone
+    img: 'https://images.unsplash.com/photo-1542401886-65d4b61ded73?auto=format&fit=crop&w=600&h=420&q=75',
     href: '/search?district=La+Fortuna',
   },
   {
     name: 'Jacó',
     sub: 'Central Pacific',
     count: 'Coming soon',
-    img: 'https://images.unsplash.com/photo-1516815231560-8f41ec531527?auto=format&fit=crop&w=600&h=420&q=75',
+    // Central Pacific surf beach with palm-lined shore
+    img: 'https://images.unsplash.com/photo-1468476396571-4d6f2a427ee7?auto=format&fit=crop&w=600&h=420&q=75',
     href: '/search?district=Jaco',
   },
 ]
@@ -89,8 +95,8 @@ export default async function HomePage() {
       <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden">
         {/* Background photo */}
         <img
-          src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=2000&q=80"
-          alt="Luxury property in Costa Rica"
+          src="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=2000&q=80"
+          alt="Aerial view of the Southern Pacific coast of Costa Rica"
           className="absolute inset-0 w-full h-full object-cover object-center"
           loading="eager"
         />

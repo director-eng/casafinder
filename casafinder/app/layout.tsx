@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     template: '%s | CasaFinder',
   },
   description: 'Find homes for sale and rent in Ojochal and the Southern Pacific coast of Costa Rica. Map-based search, verified listings, and local vendor directory.',
-  metadataBase: new URL('https://casafinder.cr'),
+  metadataBase: new URL('https://casafinder.co'),
   openGraph: {
     siteName: 'CasaFinder',
     locale: 'en_US',

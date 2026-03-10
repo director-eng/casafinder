@@ -1,9 +1,9 @@
+/* External imports must come first */
+@import 'leaflet/dist/leaflet.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Leaflet map styles */
-@import 'leaflet/dist/leaflet.css';
 
 /* ─── CasaFinder Design Tokens ─────────────────────────────────────────── */
 :root {
