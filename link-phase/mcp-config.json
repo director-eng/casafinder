@@ -1,0 +1,29 @@
+{
+  "_comment": "CasaFinder — Firecrawl MCP Server Config",
+  "_instructions": [
+    "1. Add the 'firecrawl-mcp' block to your existing Claude Desktop / Claude Code MCP config",
+    "2. Mac config location: ~/Library/Application Support/Claude/claude_desktop_config.json",
+    "3. Claude Code config location: ~/.claude/config.json (or project .claude/config.json)",
+    "4. After adding, restart Claude Desktop or reload Claude Code",
+    "5. Verify the MCP is active by asking Claude: 'List your available MCP tools'"
+  ],
+  "mcpServers": {
+    "firecrawl-mcp": {
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "fc-ac3818da52dd47bca7962330c19eca19"
+      }
+    }
+  },
+  "_available_mcp_tools": [
+    "firecrawl_scrape         — Scrape a single URL → markdown/HTML/screenshot",
+    "firecrawl_crawl          — Crawl entire site → structured content",
+    "firecrawl_map            — Discover all URLs on a domain",
+    "firecrawl_extract        — AI-powered structured data extraction with schema",
+    "firecrawl_search         — Web search with content extraction",
+    "firecrawl_deep_research  — Multi-step research with synthesis",
+    "firecrawl_check_crawl_status — Check status of async crawl jobs",
+    "firecrawl_get_crawl_data — Retrieve results from completed crawl"
+  ]
+}

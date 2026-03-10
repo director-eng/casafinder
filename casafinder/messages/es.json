@@ -1,0 +1,111 @@
+{
+  "nav": {
+    "forSale": "En Venta",
+    "forRent": "En Alquiler",
+    "land": "Terrenos",
+    "vendors": "Proveedores",
+    "howTo": "Guías",
+    "listProperty": "Publicar Propiedad",
+    "login": "Ingresar",
+    "dashboard": "Panel"
+  },
+  "hero": {
+    "title": "Encuentra Tu Lugar en Costa Rica",
+    "subtitle": "Casas en venta y alquiler en Ojochal y la costa del Pacífico Sur. Búsqueda en mapa con listados verificados y datos del catastro oficial.",
+    "searchPlaceholder": "Buscar en Ojochal, Uvita, Dominical...",
+    "searchButton": "Buscar"
+  },
+  "search": {
+    "title": "Buscar Propiedades",
+    "filters": "Filtros",
+    "sortBy": "Ordenar por",
+    "sortNewest": "Más reciente",
+    "sortPriceAsc": "Precio: Menor a Mayor",
+    "sortPriceDesc": "Precio: Mayor a Menor",
+    "noResults": "No se encontraron propiedades. Intenta ajustar los filtros.",
+    "listView": "Lista",
+    "mapView": "Mapa",
+    "resultsCount": "{count} propiedades encontradas"
+  },
+  "listing": {
+    "forSale": "En Venta",
+    "forRent": "En Alquiler",
+    "vacationRental": "Alquiler Vacacional",
+    "priceOnRequest": "Precio a Consultar",
+    "perMonth": "/mes",
+    "perNight": "/noche",
+    "bedrooms": "{n} hab",
+    "bathrooms": "{n} baños",
+    "area": "{n} m²",
+    "lot": "Lote {n} m²",
+    "description": "Descripción",
+    "details": "Detalles de la Propiedad",
+    "location": "Ubicación",
+    "cadastreData": "Datos del Catastro",
+    "contactAgent": "Contactar Agente",
+    "saveProperty": "Guardar Propiedad",
+    "share": "Compartir",
+    "viewMap": "Ver en Mapa",
+    "listingType": "Tipo de Listado",
+    "propertyType": "Tipo de Propiedad",
+    "yearBuilt": "Año de Construcción",
+    "garage": "Garaje",
+    "pool": "Piscina",
+    "furnished": "Amueblado",
+    "fincaNumber": "Finca #",
+    "province": "Provincia",
+    "district": "Distrito"
+  },
+  "filters": {
+    "listingType": "Tipo",
+    "propertyType": "Tipo de Propiedad",
+    "priceMin": "Precio Mínimo",
+    "priceMax": "Precio Máximo",
+    "bedroomsMin": "Habitaciones",
+    "bathroomsMin": "Baños",
+    "areaMin": "Área Mínima (m²)",
+    "features": "Características",
+    "pool": "Piscina",
+    "garage": "Garaje",
+    "furnished": "Amueblado",
+    "ocean_view": "Vista al Mar",
+    "clear": "Limpiar Filtros",
+    "apply": "Aplicar"
+  },
+  "lead": {
+    "title": "Contactar Agente",
+    "name": "Tu Nombre",
+    "email": "Correo",
+    "phone": "Teléfono (opcional)",
+    "message": "Mensaje",
+    "messagePlaceholder": "Me interesa esta propiedad...",
+    "submit": "Enviar Consulta",
+    "sending": "Enviando...",
+    "success": "¡Tu consulta fue enviada! Un agente se pondrá en contacto pronto.",
+    "error": "Algo salió mal. Por favor intenta de nuevo."
+  },
+  "vendors": {
+    "title": "Directorio de Proveedores",
+    "subtitle": "Contratistas, servicios y profesionales de confianza en la zona del Pacífico Sur.",
+    "searchPlaceholder": "Buscar proveedores...",
+    "categories": "Categorías",
+    "allCategories": "Todas las Categorías",
+    "contact": "Contactar",
+    "website": "Sitio Web",
+    "phone": "Teléfono",
+    "email": "Correo"
+  },
+  "howTo": {
+    "title": "Guías Prácticas",
+    "subtitle": "Guías prácticas para vivir y construir en Costa Rica.",
+    "readMore": "Leer Más",
+    "minuteRead": "{n} min de lectura"
+  },
+  "footer": {
+    "tagline": "Bienes raíces en Costa Rica para la zona del Pacífico Sur.",
+    "search": "Buscar",
+    "discover": "Descubrir",
+    "agents": "Agentes",
+    "rights": "Todos los derechos reservados."
+  }
+}

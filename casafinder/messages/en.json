@@ -1,0 +1,111 @@
+{
+  "nav": {
+    "forSale": "For Sale",
+    "forRent": "For Rent",
+    "land": "Land",
+    "vendors": "Vendors",
+    "howTo": "How-To",
+    "listProperty": "List a Property",
+    "login": "Login",
+    "dashboard": "Dashboard"
+  },
+  "hero": {
+    "title": "Find Your Place in Costa Rica",
+    "subtitle": "Homes for sale and rent in Ojochal and the Southern Pacific coast. Map-based search with verified listings and official cadastre data.",
+    "searchPlaceholder": "Search Ojochal, Uvita, Dominical...",
+    "searchButton": "Search"
+  },
+  "search": {
+    "title": "Search Properties",
+    "filters": "Filters",
+    "sortBy": "Sort by",
+    "sortNewest": "Newest",
+    "sortPriceAsc": "Price: Low to High",
+    "sortPriceDesc": "Price: High to Low",
+    "noResults": "No properties found. Try adjusting your filters.",
+    "listView": "List",
+    "mapView": "Map",
+    "resultsCount": "{count} properties found"
+  },
+  "listing": {
+    "forSale": "For Sale",
+    "forRent": "For Rent",
+    "vacationRental": "Vacation Rental",
+    "priceOnRequest": "Price on Request",
+    "perMonth": "/mo",
+    "perNight": "/night",
+    "bedrooms": "{n} bd",
+    "bathrooms": "{n} ba",
+    "area": "{n} m²",
+    "lot": "{n} m² lot",
+    "description": "Description",
+    "details": "Property Details",
+    "location": "Location",
+    "cadastreData": "Cadastre Data",
+    "contactAgent": "Contact Agent",
+    "saveProperty": "Save Property",
+    "share": "Share",
+    "viewMap": "View on Map",
+    "listingType": "Listing Type",
+    "propertyType": "Property Type",
+    "yearBuilt": "Year Built",
+    "garage": "Garage",
+    "pool": "Pool",
+    "furnished": "Furnished",
+    "fincaNumber": "Finca #",
+    "province": "Province",
+    "district": "District"
+  },
+  "filters": {
+    "listingType": "Type",
+    "propertyType": "Property Type",
+    "priceMin": "Min Price",
+    "priceMax": "Max Price",
+    "bedroomsMin": "Bedrooms",
+    "bathroomsMin": "Bathrooms",
+    "areaMin": "Min Area (m²)",
+    "features": "Features",
+    "pool": "Pool",
+    "garage": "Garage",
+    "furnished": "Furnished",
+    "ocean_view": "Ocean View",
+    "clear": "Clear Filters",
+    "apply": "Apply"
+  },
+  "lead": {
+    "title": "Contact Agent",
+    "name": "Your Name",
+    "email": "Email",
+    "phone": "Phone (optional)",
+    "message": "Message",
+    "messagePlaceholder": "I'm interested in this property...",
+    "submit": "Send Inquiry",
+    "sending": "Sending...",
+    "success": "Your inquiry has been sent! An agent will be in touch shortly.",
+    "error": "Something went wrong. Please try again."
+  },
+  "vendors": {
+    "title": "Vendor Directory",
+    "subtitle": "Trusted contractors, services, and professionals in the Southern Pacific zone.",
+    "searchPlaceholder": "Search vendors...",
+    "categories": "Categories",
+    "allCategories": "All Categories",
+    "contact": "Contact",
+    "website": "Website",
+    "phone": "Phone",
+    "email": "Email"
+  },
+  "howTo": {
+    "title": "How-To Guides",
+    "subtitle": "Practical guides for living and building in Costa Rica.",
+    "readMore": "Read More",
+    "minuteRead": "{n} min read"
+  },
+  "footer": {
+    "tagline": "Costa Rica real estate for the Southern Pacific zone.",
+    "search": "Search",
+    "discover": "Discover",
+    "agents": "Agents",
+    "rights": "All rights reserved."
+  }
+}
