@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
+import { HeroImage } from '@/components/ui/hero-image'
 
 export const dynamic = 'force-dynamic'
 
@@ -94,18 +95,8 @@ export default async function HomePage() {
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden">
         {/* Background photo */}
-        {/* Hero photo — drop your aerial Ojochal/Dominical shot at public/images/hero-ojochal.jpg */}
-        <img
-          src="/images/hero-ojochal.jpg"
-          alt="Aerial view of the Southern Pacific coast of Costa Rica — jungle mountains, river, and Pacific waves"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-          loading="eager"
-          onError={(e) => {
-            // Fallback to Unsplash until local photo is placed in public/images/
-            ;(e.currentTarget as HTMLImageElement).src =
-              'https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=2000&q=80'
-          }}
-        />
+        {/* Hero photo — client component handles onError fallback to Unsplash */}
+        <HeroImage />
         {/* Gradient overlay — bottom up, very controlled */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/10" />
 
