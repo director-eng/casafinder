@@ -158,7 +158,7 @@ export default function PricingPage() {
       <section className="py-24 px-6 text-center">
         <div className="max-w-lg mx-auto">
           <h2 className="text-[1.75rem] font-bold text-[#1F2937] mb-3 leading-tight">
-            Ready to reach more buyers?
+            Your next buyer is already on the map.
           </h2>
           <p className="text-[15px] text-[#7A8494] mb-8 leading-relaxed">
             Free to join. Takes 3 minutes. Your listings live on the map today.

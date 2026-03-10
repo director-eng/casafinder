@@ -47,7 +47,7 @@ export function Nav() {
               { label: 'For Rent', href: '/search?type=rent' },
               { label: 'Land', href: '/search?type=sale&propertyType=lot' },
               { label: 'Vendors', href: '/vendors' },
-              { label: 'How-To', href: '/how-to' },
+              { label: 'Guides', href: '/how-to' },
             ].map(({ label, href }) => (
               <Link
                 key={href}

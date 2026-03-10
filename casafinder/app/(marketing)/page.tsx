@@ -67,8 +67,8 @@ const howItWorks = [
   },
   {
     step: '02',
-    title: 'Explore with local context',
-    desc: 'Filter by ocean view, road condition, water source, and 20+ Costa Rica–specific fields that matter on the ground but most platforms ignore.',
+    title: 'Filter for what matters here',
+    desc: 'Ocean view, road condition, water source, legal status — 20+ Costa Rica–specific fields that matter on the ground but most platforms ignore.',
   },
   {
     step: '03',
@@ -94,11 +94,17 @@ export default async function HomePage() {
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden">
         {/* Background photo */}
+        {/* Hero photo — drop your aerial Ojochal/Dominical shot at public/images/hero-ojochal.jpg */}
         <img
-          src="https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=2000&q=80"
-          alt="Aerial view of the Southern Pacific coast of Costa Rica"
+          src="/images/hero-ojochal.jpg"
+          alt="Aerial view of the Southern Pacific coast of Costa Rica — jungle mountains, river, and Pacific waves"
           className="absolute inset-0 w-full h-full object-cover object-center"
           loading="eager"
+          onError={(e) => {
+            // Fallback to Unsplash until local photo is placed in public/images/
+            ;(e.currentTarget as HTMLImageElement).src =
+              'https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=2000&q=80'
+          }}
         />
         {/* Gradient overlay — bottom up, very controlled */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/10" />
@@ -108,7 +114,7 @@ export default async function HomePage() {
           {/* Eyebrow */}
           <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/25 text-white/90 text-[13px] font-medium px-4 py-1.5 rounded-full mb-8 tracking-wide">
             <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80] inline-block" />
-            Now live in Ojochal &amp; Southern Pacific
+            Now live in the Southern Pacific
           </div>
 
           {/* Headline */}
@@ -118,7 +124,7 @@ export default async function HomePage() {
 
           {/* Sub */}
           <p className="text-[clamp(1rem,2.2vw,1.2rem)] text-white/75 mb-10 leading-relaxed max-w-xl mx-auto">
-            Homes for sale and rent across the Pacific Coast,<br className="hidden sm:block" /> Central Valley, and beyond.
+            Homes for sale and rent in Ojochal, the Pacific Coast,<br className="hidden sm:block" /> and the Central Valley.
           </p>
 
           {/* Search bar */}
@@ -297,9 +303,9 @@ export default async function HomePage() {
             ))}
           </div>
           <div className="mt-10 text-center">
-            <p className="text-[#7A8494] text-[15px] mb-4">Be among the first to list on CasaFinder.</p>
+            <p className="text-[#7A8494] text-[15px] mb-4">Be among the first to list in the Southern Pacific.</p>
             <a href="/signup" className="inline-flex items-center gap-2 px-7 py-3 bg-[#0F5AE5] hover:bg-[#0B4CC4] text-white text-[14px] font-semibold rounded-full transition-colors">
-              List a property →
+              List a property
             </a>
           </div>
         </section>
@@ -310,7 +316,7 @@ export default async function HomePage() {
         <div className="max-w-[1280px] mx-auto">
           <div className="mb-10">
             <p className="text-[12px] font-semibold text-[#0F5AE5] uppercase tracking-[0.1em] mb-2">Explore</p>
-            <h2 className="text-[2rem] font-bold text-[#1F2937] leading-tight">Costa Rica, by region</h2>
+            <h2 className="text-[2rem] font-bold text-[#1F2937] leading-tight">Explore by region</h2>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -408,10 +414,10 @@ export default async function HomePage() {
         <div className="max-w-[720px] mx-auto text-center">
           <p className="text-[12px] font-semibold text-[#0F5AE5] uppercase tracking-[0.1em] mb-4">For Agents</p>
           <h2 className="text-[2rem] font-bold text-[#1F2937] leading-tight mb-4">
-            The Southern Pacific's most modern<br className="hidden sm:block" /> real estate platform. Free to join.
+            The Southern Pacific's first map-first<br className="hidden sm:block" /> real estate platform. Free to join.
           </h2>
           <p className="text-[16px] text-[#5B6472] leading-relaxed mb-10 max-w-lg mx-auto">
-            List your properties, receive leads directly, and be part of the region's first map-first marketplace. No per-lead fees. No fine print.
+            List your properties and receive leads directly. No per-lead fees. No fine print.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
