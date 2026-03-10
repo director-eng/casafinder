@@ -1,18 +1,79 @@
 import type { Metadata } from 'next'
 import { createClient } from '@/lib/supabase/server'
-import type { ListingWithImage } from '@/lib/supabase/types'
 
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: 'CasaFinder — Costa Rica Real Estate | Ojochal & Southern Pacific',
-  description: 'Search homes for sale and rent in Ojochal and the Southern Pacific coast of Costa Rica. Map-based search with verified listings and catastro data.',
+  description: 'Search homes for sale and rent in Ojochal and the Southern Pacific coast of Costa Rica. Map-based search with verified listings and cadastre data.',
 }
+
+const regions = [
+  {
+    name: 'Ojochal · Uvita',
+    sub: 'Southern Pacific',
+    count: 'Launching here',
+    img: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&h=420&q=75',
+    href: '/search?district=Ojochal',
+  },
+  {
+    name: 'Manuel Antonio',
+    sub: 'Pacific Coast',
+    count: 'Coming soon',
+    img: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&h=420&q=75',
+    href: '/search?district=Manuel+Antonio',
+  },
+  {
+    name: 'Tamarindo',
+    sub: 'Guanacaste',
+    count: 'Coming soon',
+    img: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=600&h=420&q=75',
+    href: '/search?district=Tamarindo',
+  },
+  {
+    name: 'Escazú · Santa Ana',
+    sub: 'Central Valley',
+    count: 'Coming soon',
+    img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=600&h=420&q=75',
+    href: '/search?district=Escazu',
+  },
+  {
+    name: 'La Fortuna',
+    sub: 'Northern Zone',
+    count: 'Coming soon',
+    img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=600&h=420&q=75',
+    href: '/search?district=La+Fortuna',
+  },
+  {
+    name: 'Jacó',
+    sub: 'Central Pacific',
+    count: 'Coming soon',
+    img: 'https://images.unsplash.com/photo-1516815231560-8f41ec531527?auto=format&fit=crop&w=600&h=420&q=75',
+    href: '/search?district=Jaco',
+  },
+]
+
+const howItWorks = [
+  {
+    step: '01',
+    title: 'Search the map',
+    desc: 'Every listing lives on an interactive map with official cadastre parcel data. See exactly where a property sits — not just an approximate pin.',
+  },
+  {
+    step: '02',
+    title: 'Explore with local context',
+    desc: 'Filter by ocean view, road condition, water source, and 20+ Costa Rica–specific fields that matter on the ground but most platforms ignore.',
+  },
+  {
+    step: '03',
+    title: 'Connect with the agent',
+    desc: 'One tap reaches the listing agent directly by email or WhatsApp. No referral fees, no lead auctions, no middlemen between you and the person who knows the property.',
+  },
+]
 
 export default async function HomePage() {
   const supabase = await createClient()
 
-  // Fetch featured listings for homepage
   const { data: featured } = await supabase
     .from('listings')
     .select('*, listing_images(url, alt_text, is_primary)')
@@ -23,178 +84,422 @@ export default async function HomePage() {
 
   return (
     <main className="min-h-screen bg-white">
-      {/* Hero */}
-      <section className="relative bg-gradient-to-br from-green-800 to-teal-700 text-white py-24 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl font-bold mb-4">
-            Find Your Place in Costa Rica
+
+      {/* ── Hero ──────────────────────────────────────────────────────────── */}
+      <section className="relative min-h-[88vh] flex items-center justify-center overflow-hidden">
+        {/* Background photo */}
+        <img
+          src="https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=2000&q=80"
+          alt="Luxury property in Costa Rica"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          loading="eager"
+        />
+        {/* Gradient overlay — bottom up, very controlled */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/10" />
+
+        {/* Content */}
+        <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
+          {/* Eyebrow */}
+          <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/25 text-white/90 text-[13px] font-medium px-4 py-1.5 rounded-full mb-8 tracking-wide">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#4ADE80] inline-block" />
+            Now live in Ojochal &amp; Southern Pacific
+          </div>
+
+          {/* Headline */}
+          <h1 className="text-[clamp(2.5rem,6vw,4rem)] font-extrabold text-white leading-[1.08] tracking-tight mb-5">
+            Find your place<br />in Costa Rica.
           </h1>
-          <p className="text-xl text-white/80 mb-8">
-            Homes for sale and rent in Ojochal and the Southern Pacific coast.
-            Map-based search with verified listings and official cadastre data.
+
+          {/* Sub */}
+          <p className="text-[clamp(1rem,2.2vw,1.2rem)] text-white/75 mb-10 leading-relaxed max-w-xl mx-auto">
+            Homes for sale and rent across the Pacific Coast,<br className="hidden sm:block" /> Central Valley, and beyond.
           </p>
 
-          {/* Quick search */}
-          <form action="/search" className="flex gap-2 max-w-2xl mx-auto">
-            <input
-              type="text"
-              name="q"
-              placeholder="Search Ojochal, Uvita, Dominical..."
-              className="flex-1 px-4 py-3 rounded-lg text-gray-900 text-lg focus:outline-none focus:ring-2 focus:ring-[#0F5AE5]"
-            />
-            <button
-              type="submit"
-              className="px-8 py-3 bg-amber-500 hover:bg-amber-400 text-white font-semibold rounded-lg transition-colors"
+          {/* Search bar */}
+          <form
+            action="/search"
+            className="flex items-center bg-white rounded-[9999px] shadow-2xl overflow-hidden max-w-[640px] mx-auto h-[60px] group"
+          >
+            <div className="flex-1 flex items-center gap-3 pl-5">
+              <svg className="w-[18px] h-[18px] text-[#7A8494] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <circle cx="11" cy="11" r="7" /><path d="M21 21l-4.35-4.35" strokeLinecap="round" />
+              </svg>
+              <input
+                type="text"
+                name="q"
+                placeholder="Search Ojochal, Uvita, Dominical…"
+                className="flex-1 bg-transparent border-none outline-none text-[15px] text-[#1F2937] placeholder:text-[#9CA3AF] min-w-0"
+                autoComplete="off"
+              />
+            </div>
+            <div className="border-l border-[#E5E7EB] mx-1 h-7" />
+            <select
+              name="type"
+              className="border-none outline-none bg-transparent text-[13px] font-medium text-[#5B6472] px-3 cursor-pointer"
             >
-              Search
-            </button>
+              <option value="sale">For Sale</option>
+              <option value="rent">For Rent</option>
+              <option value="rent_vacation">Vacation</option>
+            </select>
+            <div className="p-1.5 pr-2">
+              <button
+                type="submit"
+                className="h-[46px] px-7 bg-[#0F5AE5] hover:bg-[#0B4CC4] active:bg-[#0A44B0] text-white text-[14px] font-semibold rounded-[9999px] transition-colors duration-[120ms] whitespace-nowrap"
+              >
+                Search
+              </button>
+            </div>
           </form>
 
-          {/* Quick filters */}
-          <div className="flex gap-3 justify-center mt-4 flex-wrap">
+          {/* Quick-access chips */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-5">
             {[
               { label: 'Homes for Sale', href: '/search?type=sale&propertyType=house' },
-              { label: 'Lots & Land', href: '/search?type=sale&propertyType=lot' },
-              { label: 'Rentals', href: '/search?type=rent' },
+              { label: 'Land & Lots', href: '/search?type=sale&propertyType=lot' },
+              { label: 'For Rent', href: '/search?type=rent' },
               { label: 'Vacation Rentals', href: '/search?type=rent_vacation' },
             ].map(({ label, href }) => (
               <a
                 key={href}
                 href={href}
-                className="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-full text-sm font-medium transition-colors"
+                className="px-4 py-1.5 bg-white/15 hover:bg-white/25 backdrop-blur-sm border border-white/25 text-white/90 text-[13px] font-medium rounded-full transition-all duration-[120ms]"
               >
                 {label}
               </a>
             ))}
           </div>
         </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+          <svg className="w-5 h-5 text-white/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
       </section>
 
-      {/* Featured listings */}
-      {featured && featured.length > 0 && (
-        <section className="max-w-7xl mx-auto px-4 py-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">Featured Properties</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featured.map((listing: any) => (
-              <a
-                key={listing.id}
-                href={`/listing/${listing.slug}`}
-                className="listing-card rounded-xl overflow-hidden border border-gray-100 bg-white"
-              >
-                <div className="aspect-video bg-gray-100 relative">
-                  {listing.listing_images?.[0] && (
-                    <img
-                      src={listing.listing_images[0].url}
-                      alt={listing.listing_images[0].alt_text || listing.title}
-                      className="w-full h-full object-cover"
-                    />
-                  )}
-                  <span className="absolute top-3 left-3 bg-[#0F5AE5] text-white text-xs font-semibold px-2 py-1 rounded capitalize">
-                    {listing.listing_type === 'rent_vacation' ? 'Vacation Rental' :
-                     listing.listing_type === 'rent' ? 'For Rent' : 'For Sale'}
-                  </span>
-                </div>
-                <div className="p-4">
-                  <h3 className="font-semibold text-gray-900 mb-1 line-clamp-2">
-                    {listing.title_en || listing.title}
-                  </h3>
-                  <p className="text-gray-500 text-sm mb-2">
-                    {listing.district}, {listing.province}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <span className="price-usd text-xl">
-                      {listing.price_usd
-                        ? `$${listing.price_usd.toLocaleString()}`
-                        : listing.listing_type === 'rent' || listing.listing_type === 'rent_vacation'
-                          ? `$${listing.price_usd?.toLocaleString()}/mo`
-                          : 'Price on request'}
+      {/* ── Featured Properties ────────────────────────────────────────────── */}
+      {featured && featured.length > 0 ? (
+        <section className="max-w-[1280px] mx-auto px-6 py-20">
+          {/* Section header */}
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="text-[12px] font-semibold text-[#0F5AE5] uppercase tracking-[0.1em] mb-2">Featured</p>
+              <h2 className="text-[2rem] font-bold text-[#1F2937] leading-tight">Recently listed properties</h2>
+            </div>
+            <a href="/search" className="hidden sm:inline-flex items-center gap-1.5 text-[14px] font-medium text-[#0F5AE5] hover:text-[#0B4CC4] transition-colors">
+              View all
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featured.map((listing: any) => {
+              const primaryImg = listing.listing_images?.find((i: any) => i.is_primary) ?? listing.listing_images?.[0]
+              const typeLabel = listing.listing_type === 'rent_vacation' ? 'Vacation Rental'
+                : listing.listing_type === 'rent' ? 'For Rent' : 'For Sale'
+              const price = listing.price_usd
+                ? `$${listing.price_usd.toLocaleString()}${listing.listing_type !== 'sale' ? '/mo' : ''}`
+                : 'Price on request'
+              const facts = [
+                listing.bedrooms && `${listing.bedrooms} bd`,
+                listing.bathrooms && `${listing.bathrooms} ba`,
+                listing.area_built_m2 && `${listing.area_built_m2.toLocaleString()} m²`,
+              ].filter(Boolean).join(' · ')
+
+              return (
+                <a
+                  key={listing.id}
+                  href={`/listing/${listing.slug}`}
+                  className="group block bg-white border border-[#E5E7EB] rounded-[12px] overflow-hidden shadow-[0_2px_4px_rgba(16,24,40,0.07)] hover:shadow-[0_4px_10px_rgba(16,24,40,0.10)] hover:scale-[1.01] transition-all duration-[180ms]"
+                >
+                  {/* Photo */}
+                  <div className="aspect-[16/10] bg-[#F5F7FA] relative overflow-hidden">
+                    {primaryImg ? (
+                      <img
+                        src={primaryImg.url}
+                        alt={primaryImg.alt_text || listing.title}
+                        className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <svg className="w-10 h-10 text-[#E5E7EB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                        </svg>
+                      </div>
+                    )}
+                    {/* Type badge */}
+                    <span className="absolute top-3 left-3 bg-[#0F5AE5] text-white text-[11px] font-semibold px-2.5 py-1 rounded-[8px] tracking-[0.01em]">
+                      {typeLabel}
                     </span>
-                    <span className="text-gray-400 text-sm">
-                      {[
-                        listing.bedrooms && `${listing.bedrooms}bd`,
-                        listing.bathrooms && `${listing.bathrooms}ba`,
-                        listing.area_lot_m2 && `${listing.area_lot_m2.toLocaleString()}m²`,
-                      ].filter(Boolean).join(' · ')}
-                    </span>
+                    {/* Heart */}
+                    <button
+                      type="button"
+                      aria-label="Save listing"
+                      className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center bg-white/80 hover:bg-white rounded-full transition-colors"
+                    >
+                      <svg className="w-4 h-4 text-[#5B6472]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                      </svg>
+                    </button>
                   </div>
+
+                  {/* Details */}
+                  <div className="p-4 pb-5">
+                    <div className="text-[22px] font-bold text-[#1F2937] tabular-nums leading-tight mb-1">{price}</div>
+                    {facts && <div className="text-[13px] text-[#5B6472] mb-1">{facts}</div>}
+                    <div className="text-[13px] text-[#5B6472]">
+                      {[listing.district, listing.province].filter(Boolean).join(', ')}
+                    </div>
+                  </div>
+                </a>
+              )
+            })}
+          </div>
+
+          <div className="text-center mt-12 sm:hidden">
+            <a href="/search" className="inline-flex items-center gap-2 text-[14px] font-medium text-[#0F5AE5]">
+              View all listings
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </section>
+      ) : (
+        /* Empty state — shown until agent listings go live */
+        <section className="max-w-[1280px] mx-auto px-6 py-20">
+          <div className="flex items-end justify-between mb-10">
+            <div>
+              <p className="text-[12px] font-semibold text-[#0F5AE5] uppercase tracking-[0.1em] mb-2">Properties</p>
+              <h2 className="text-[2rem] font-bold text-[#1F2937] leading-tight">Listings coming soon</h2>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[1, 2, 3].map(i => (
+              <div key={i} className="bg-[#F5F7FA] border border-[#E5E7EB] rounded-[12px] overflow-hidden">
+                <div className="aspect-[16/10] bg-gradient-to-br from-[#E5E7EB] to-[#F5F7FA]" />
+                <div className="p-4 space-y-2.5">
+                  <div className="h-6 bg-[#E5E7EB] rounded-full w-1/2" />
+                  <div className="h-4 bg-[#E5E7EB] rounded-full w-3/4" />
+                  <div className="h-4 bg-[#E5E7EB] rounded-full w-2/3" />
                 </div>
-              </a>
+              </div>
             ))}
           </div>
-          <div className="text-center mt-10">
-            <a
-              href="/search"
-              className="inline-block px-8 py-3 bg-[#0F5AE5] hover:bg-[#0B4CC4] text-white font-semibold rounded-lg transition-colors"
-            >
-              View All Listings
+          <div className="mt-10 text-center">
+            <p className="text-[#7A8494] text-[15px] mb-4">Be among the first to list on CasaFinder.</p>
+            <a href="/signup" className="inline-flex items-center gap-2 px-7 py-3 bg-[#0F5AE5] hover:bg-[#0B4CC4] text-white text-[14px] font-semibold rounded-full transition-colors">
+              List a property →
             </a>
           </div>
         </section>
       )}
 
-      {/* Region intro */}
-      <section className="bg-[#EAF2FF] py-16 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Why Ojochal?</h2>
-          <p className="text-gray-600 text-lg leading-relaxed">
-            Nestled between the Osa Peninsula and Ballena Marine National Park,
-            Ojochal is Costa Rica's hidden gem — a bilingual expat community
-            famous for world-class dining, stunning ocean views, sustainable
-            living, and proximity to pristine beaches and jungle.
-          </p>
-          <div className="grid grid-cols-3 gap-8 mt-12 text-center">
+      {/* ── Explore by Region ─────────────────────────────────────────────── */}
+      <section className="bg-[#F5F7FA] border-y border-[#E5E7EB] py-20 px-6">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="mb-10">
+            <p className="text-[12px] font-semibold text-[#0F5AE5] uppercase tracking-[0.1em] mb-2">Explore</p>
+            <h2 className="text-[2rem] font-bold text-[#1F2937] leading-tight">Costa Rica, by region</h2>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {regions.map(({ name, sub, count, img, href }) => (
+              <a
+                key={name}
+                href={href}
+                className="group relative block rounded-[12px] overflow-hidden aspect-[3/4] md:aspect-[4/5] bg-[#E5E7EB]"
+              >
+                <img
+                  src={img}
+                  alt={name}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-3">
+                  <div className="text-white font-semibold text-[13px] leading-tight">{name}</div>
+                  <div className="text-white/65 text-[11px] mt-0.5">{sub}</div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Why the Southern Pacific ──────────────────────────────────────── */}
+      <section className="max-w-[1280px] mx-auto px-6 py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Left — editorial */}
+          <div>
+            <p className="text-[12px] font-semibold text-[#0F5AE5] uppercase tracking-[0.1em] mb-4">The Southern Pacific</p>
+            <h2 className="text-[2.25rem] font-bold text-[#1F2937] leading-[1.1] tracking-tight mb-6">
+              Unlike anywhere<br />else in Costa Rica.
+            </h2>
+            <p className="text-[16px] text-[#5B6472] leading-[1.7] mb-4">
+              Nestled between the Osa Peninsula and Ballena Marine National Park, Ojochal is a bilingual expat community famous for world-class dining, ocean views, sustainable living, and direct access to pristine beaches and primary jungle.
+            </p>
+            <p className="text-[16px] text-[#5B6472] leading-[1.7] mb-8">
+              Property here is unlike anywhere else in the country — shaped by topography, microclimates, and a community that chose this coast deliberately. CasaFinder is built to capture that nuance.
+            </p>
+            <a
+              href="/search?district=Ojochal"
+              className="inline-flex items-center gap-2 px-7 py-3 bg-[#0F5AE5] hover:bg-[#0B4CC4] text-white text-[14px] font-semibold rounded-full transition-colors"
+            >
+              Explore Ojochal properties
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+
+          {/* Right — stats */}
+          <div className="grid grid-cols-2 gap-6">
             {[
-              { stat: '2hr', label: 'From San José' },
-              { stat: '30+', label: 'Restaurants' },
-              { stat: '300+', label: 'Days of Sun/Year' },
-            ].map(({ stat, label }) => (
-              <div key={label}>
-                <div className="text-4xl font-bold text-[#0F5AE5]">{stat}</div>
-                <div className="text-gray-600 mt-1">{label}</div>
+              { stat: '2h', label: 'From San José', detail: 'Via the Costanera Sur highway' },
+              { stat: '300+', label: 'Days of sun/year', detail: 'Dry season May – December' },
+              { stat: '30+', label: 'Restaurants', detail: 'International cuisine in the jungle' },
+              { stat: '50km', label: 'Of coastline', detail: 'Ballena National Marine Park' },
+            ].map(({ stat, label, detail }) => (
+              <div key={label} className="bg-white border border-[#E5E7EB] rounded-[16px] p-6">
+                <div className="text-[2.5rem] font-extrabold text-[#0F5AE5] leading-none mb-2">{stat}</div>
+                <div className="text-[15px] font-semibold text-[#1F2937] mb-1">{label}</div>
+                <div className="text-[13px] text-[#7A8494] leading-snug">{detail}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-gray-400 py-12 px-4">
-        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-          <div>
-            <div className="text-white font-bold text-xl mb-3">CasaFinder</div>
-            <p className="text-sm">Costa Rica real estate for the Southern Pacific zone.</p>
+      {/* ── How It Works ──────────────────────────────────────────────────── */}
+      <section className="bg-[#F5F7FA] border-y border-[#E5E7EB] py-24 px-6">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="text-center max-w-xl mx-auto mb-16">
+            <p className="text-[12px] font-semibold text-[#0F5AE5] uppercase tracking-[0.1em] mb-3">How it works</p>
+            <h2 className="text-[2rem] font-bold text-[#1F2937] leading-tight">
+              Built for the way people<br />actually find property here.
+            </h2>
           </div>
-          <div>
-            <div className="text-white font-semibold mb-3">Search</div>
-            <ul className="space-y-2 text-sm">
-              <li><a href="/search?type=sale" className="hover:text-white">Homes for Sale</a></li>
-              <li><a href="/search?type=rent" className="hover:text-white">Rentals</a></li>
-              <li><a href="/search?type=sale&propertyType=lot" className="hover:text-white">Lots & Land</a></li>
-            </ul>
-          </div>
-          <div>
-            <div className="text-white font-semibold mb-3">Discover</div>
-            <ul className="space-y-2 text-sm">
-              <li><a href="/vendors" className="hover:text-white">Vendor Directory</a></li>
-              <li><a href="/how-to" className="hover:text-white">How-To Guides</a></li>
-              <li><a href="/ojochal-real-estate" className="hover:text-white">Ojochal Real Estate</a></li>
-            </ul>
-          </div>
-          <div>
-            <div className="text-white font-semibold mb-3">Agents</div>
-            <ul className="space-y-2 text-sm">
-              <li><a href="/signup" className="hover:text-white">List a Property</a></li>
-              <li><a href="/pricing" className="hover:text-white">Pricing</a></li>
-              <li><a href="/dashboard" className="hover:text-white">Agent Portal</a></li>
-              <li><a href="/about" className="hover:text-white">About</a></li>
-              <li><a href="/about#contact" className="hover:text-white">Contact</a></li>
-            </ul>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {howItWorks.map(({ step, title, desc }) => (
+              <div key={step} className="bg-white border border-[#E5E7EB] rounded-[16px] p-8">
+                <div className="text-[13px] font-bold text-[#0F5AE5] tracking-[0.05em] mb-5">{step}</div>
+                <h3 className="text-[18px] font-bold text-[#1F2937] mb-3">{title}</h3>
+                <p className="text-[14px] text-[#5B6472] leading-[1.65]">{desc}</p>
+              </div>
+            ))}
           </div>
         </div>
-        <div className="max-w-7xl mx-auto mt-8 pt-8 border-t border-gray-800 text-sm text-center">
-          © {new Date().getFullYear()} CasaFinder. All rights reserved. ·{' '}
-          <a href="/about#contact" className="hover:text-white">Contact</a> ·{' '}
-          <a href="/pricing" className="hover:text-white">Pricing</a>
+      </section>
+
+      {/* ── Agent CTA ─────────────────────────────────────────────────────── */}
+      <section className="py-24 px-6">
+        <div className="max-w-[720px] mx-auto text-center">
+          <p className="text-[12px] font-semibold text-[#0F5AE5] uppercase tracking-[0.1em] mb-4">For Agents</p>
+          <h2 className="text-[2rem] font-bold text-[#1F2937] leading-tight mb-4">
+            The Southern Pacific's most modern<br className="hidden sm:block" /> real estate platform. Free to join.
+          </h2>
+          <p className="text-[16px] text-[#5B6472] leading-relaxed mb-10 max-w-lg mx-auto">
+            List your properties, receive leads directly, and be part of the region's first map-first marketplace. No per-lead fees. No fine print.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="/signup"
+              className="px-8 py-3.5 bg-[#0F5AE5] hover:bg-[#0B4CC4] text-white text-[14px] font-semibold rounded-full transition-colors"
+            >
+              Create free agent account
+            </a>
+            <a
+              href="/pricing"
+              className="px-8 py-3.5 border border-[#E5E7EB] hover:border-[#0F5AE5] hover:text-[#0F5AE5] text-[#5B6472] text-[14px] font-medium rounded-full transition-colors"
+            >
+              See what's included
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Footer ────────────────────────────────────────────────────────── */}
+      <footer className="bg-[#F5F7FA] border-t border-[#E5E7EB] pt-14 pb-10 px-6">
+        <div className="max-w-[1280px] mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
+            {/* Brand */}
+            <div className="col-span-2 md:col-span-1">
+              <div className="text-[#1F2937] font-extrabold text-xl tracking-tight mb-3">
+                Casa<span className="text-[#0F5AE5]">Finder</span>
+              </div>
+              <p className="text-[13px] text-[#7A8494] leading-relaxed max-w-[200px]">
+                Costa Rica real estate for the Southern Pacific coast and beyond.
+              </p>
+            </div>
+
+            {/* Search */}
+            <div>
+              <div className="text-[12px] font-semibold text-[#1F2937] uppercase tracking-[0.08em] mb-4">Search</div>
+              <ul className="space-y-3">
+                {[
+                  { label: 'Homes for Sale', href: '/search?type=sale' },
+                  { label: 'Rentals', href: '/search?type=rent' },
+                  { label: 'Vacation Rentals', href: '/search?type=rent_vacation' },
+                  { label: 'Lots & Land', href: '/search?type=sale&propertyType=lot' },
+                ].map(({ label, href }) => (
+                  <li key={href}>
+                    <a href={href} className="text-[13px] text-[#7A8494] hover:text-[#1F2937] transition-colors">{label}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Discover */}
+            <div>
+              <div className="text-[12px] font-semibold text-[#1F2937] uppercase tracking-[0.08em] mb-4">Discover</div>
+              <ul className="space-y-3">
+                {[
+                  { label: 'Vendor Directory', href: '/vendors' },
+                  { label: 'How-To Guides', href: '/how-to' },
+                  { label: 'Ojochal Real Estate', href: '/ojochal-real-estate' },
+                ].map(({ label, href }) => (
+                  <li key={href}>
+                    <a href={href} className="text-[13px] text-[#7A8494] hover:text-[#1F2937] transition-colors">{label}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Company */}
+            <div>
+              <div className="text-[12px] font-semibold text-[#1F2937] uppercase tracking-[0.08em] mb-4">Company</div>
+              <ul className="space-y-3">
+                {[
+                  { label: 'For Agents', href: '/signup' },
+                  { label: 'Pricing', href: '/pricing' },
+                  { label: 'About', href: '/about' },
+                  { label: 'Contact', href: '/about#contact' },
+                ].map(({ label, href }) => (
+                  <li key={href}>
+                    <a href={href} className="text-[13px] text-[#7A8494] hover:text-[#1F2937] transition-colors">{label}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom bar */}
+          <div className="border-t border-[#E5E7EB] pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p className="text-[12px] text-[#9CA3AF]">
+              © {new Date().getFullYear()} CasaFinder. All rights reserved.
+            </p>
+            <div className="flex items-center gap-5">
+              <a href="/about" className="text-[12px] text-[#9CA3AF] hover:text-[#5B6472] transition-colors">About</a>
+              <a href="/about#contact" className="text-[12px] text-[#9CA3AF] hover:text-[#5B6472] transition-colors">Contact</a>
+              <span className="text-[12px] text-[#9CA3AF]">casafinder.co</span>
+            </div>
+          </div>
         </div>
       </footer>
     </main>

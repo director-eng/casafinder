@@ -1,7 +1,9 @@
 # CasaFinder — Brand Guidelines
-**Version 1.0 | March 2026**
+**Version 2.0 | March 2026**
 
 > Implementation-ready brand system for CasaFinder, Costa Rica's trusted real estate marketplace. Built for product, design, and engineering teams.
+
+> **v2.0 update:** Sections 21–23 integrate the Jobs/Ive Design Philosophy as the governing framework for all design decisions. All prior sections remain in effect; read Section 21 first to understand the lens through which every rule should be applied.
 
 ---
 
@@ -27,6 +29,9 @@
 18. [Implementation Notes for Frontend Teams](#18-implementation-notes-for-frontend-teams)
 19. [Design Token Block](#19-design-token-block)
 20. [Creative Summary](#20-creative-summary)
+21. [The Jobs/Ive Design Philosophy](#21-the-jobsive-design-philosophy)
+22. [Design Audit Protocol](#22-design-audit-protocol)
+23. [Scope Discipline](#23-scope-discipline)
 
 ---
 
@@ -56,6 +61,8 @@
 ---
 
 ## 2. Design Principles
+
+> These six principles govern all product and visual decisions. They are grounded in the Jobs/Ive philosophy described in full in [Section 21](#21-the-jobsive-design-philosophy). When any specific rule in Sections 3–20 conflicts with the spirit of these principles, the principles win.
 
 **1. Clarity first.**
 Every element on screen should help users find and evaluate property faster. Decorative choices that do not serve the search experience should be cut.
@@ -1264,5 +1271,180 @@ The margin between "familiar" and "clone" is exactly the space where CasaFinder 
 
 ---
 
-*CasaFinder Brand Guidelines v1.0 — March 2026*
+---
+
+## 21. The Jobs/Ive Design Philosophy
+
+> This section is the north star. Every rule in this document exists to serve it. Before shipping any screen or component, return here and verify the work passes this test.
+
+### The Role Statement
+
+A CasaFinder designer is not a decorator. They are an architect of clarity. They do not add features. They do not invent novelty for its own sake. They make every screen feel **inevitable** — as if no other design was ever possible.
+
+The product should feel calm, confident, and quiet. If the user ever notices the interface, the design has failed. The interface should be so clear that the user only thinks about Costa Rica.
+
+### Core Principles
+
+**Simplicity is architecture.**
+Every element must justify its existence. If it doesn't serve the user's immediate goal, it is clutter. The best interface is the one the user never notices. Complexity is a design failure, not a feature.
+
+**Remove until it breaks. Then add back the last thing.**
+Before adding anything, ask what can be removed. The discipline is subtractive. Every screen should have only what is essential and nothing more. When in doubt, cut it.
+
+**Hierarchy drives everything.**
+Every screen has one primary action. Make it unmissable. Secondary actions support — they never compete. If everything is bold, nothing is bold. Visual weight must match functional importance.
+
+**Whitespace is a feature.**
+Space is not empty. It is structure. Crowded interfaces feel cheap. Breathing room feels premium. When in doubt, add more space, not more elements.
+
+**Design the feeling.**
+Premium apps feel calm, confident, and quiet. Every interaction should feel responsive and intentional. Transitions should feel like physics, not decoration. The product should feel like it respects the user's time and attention.
+
+**Consistency is non-negotiable.**
+The same component must look and behave identically everywhere it appears. All values must reference the design system tokens — no hardcoded colors, spacing, or sizes.
+
+**Responsive is the real design.**
+Mobile is the starting point. Tablet and desktop are enhancements. Design for thumbs first, then cursors. Every screen must feel intentional at every viewport — not just resized.
+
+**Every pixel references the system.**
+No rogue values. No exceptions. If a token doesn't exist, propose it. Never invent values in isolation.
+
+### The Jobs Filter
+
+For every element on every screen, apply this test before shipping:
+
+| Question | If the answer is "yes" | If the answer is "no" |
+|----------|----------------------|----------------------|
+| Would a user need to be told this exists? | Redesign it until it's obvious | Ship it |
+| Can this be removed without losing meaning? | Remove it | Keep it |
+| Does this feel inevitable, like no other design was possible? | Ship it | It's not done |
+| Is this detail as refined as details users will never see? | Ship it | Refine it |
+
+**"Say no to 1,000 things."** Cut good ideas to keep great ones. Less but better.
+
+### Applied to CasaFinder
+
+| Element | Jobs/Ive Application |
+|---------|----------------------|
+| Search bar | Pill-shaped, white, centered. One goal. No decoration. |
+| Navigation | 72px, white, shadow only on scroll. Never competes with content. |
+| Listing cards | Photo → price → facts. Nothing else. |
+| Hero | Full-bleed photo. One headline. One search bar. Silence. |
+| Filter pills | Compact, horizontal, pill-shaped. Active state is blue only. |
+| Whitespace | Default to more. Sections need to breathe. Cramped = cheap. |
+| Animations | Confirm, guide, respond. Never entertain. If you can't explain why it moves, remove it. |
+| Color | Blue does work. White holds space. Neutrals carry the rest. Nothing else. |
+| Copy | Direct. Practical. Useful. Every word earns its place. |
+| Map markers | Price only. No icons. No labels. The number is the whole message. |
+
+### The Standard
+
+The product should feel like someone built Zillow's interaction model from scratch, hired a cartographer who knows the Osa Peninsula, and didn't try to make it look tropical. Consumer-grade clarity. Local depth. Earned trust.
+
+---
+
+## 22. Design Audit Protocol
+
+Use this protocol before any significant release, when reviewing a component for the first time, or whenever a screen "doesn't feel right" but you can't articulate why.
+
+### Step 1: Full Audit Dimensions
+
+Review every screen against these dimensions. Miss nothing.
+
+**Visual Hierarchy:** Does the eye land where it should? Is the most important element the most prominent? Can a user understand the screen in 2 seconds?
+
+**Spacing & Rhythm:** Is whitespace consistent and intentional? Do elements breathe or are they cramped? Is the vertical rhythm harmonious?
+
+**Typography:** Are type sizes establishing clear hierarchy? Are there too many font weights or sizes competing? Does the type feel calm or chaotic?
+
+**Color:** Is color used with restraint and purpose? Do colors guide attention or scatter it? Is contrast WCAG AA compliant?
+
+**Alignment & Grid:** Do elements sit on the 8px grid? Is anything off by 1–2px? Does every element feel locked into the layout with precision?
+
+**Components:** Are similar elements styled identically across screens? Are interactive elements obviously interactive? Are disabled, hover, and focus states all accounted for?
+
+**Iconography:** Are icons consistent in style, weight, and size? From one cohesive set (Lucide React)? Do they support meaning or just decorate?
+
+**Motion & Transitions:** Do transitions feel natural and purposeful? Is there motion that exists for no reason? Does the app feel responsive to tap/click?
+
+**Empty States:** What does every screen look like with no data? Does it feel intentional or broken? Is the user guided toward their first action?
+
+**Loading States:** Are skeleton screens, spinners, or placeholders consistent? Does the app feel alive while waiting?
+
+**Error States:** Are error messages styled consistently? Do they feel helpful and clear?
+
+**Density:** Can anything be removed without losing meaning? Are there redundant elements saying the same thing twice?
+
+**Responsiveness:** Does every screen work at mobile, tablet, and desktop? Are touch targets ≥44px on mobile? Does the layout adapt fluidly — not just snap at three breakpoints?
+
+**Accessibility:** Keyboard navigation, visible focus rings, ARIA labels, color contrast ratios, screen reader flow.
+
+### Step 2: Apply the Jobs Filter
+
+After the full audit, apply the four Jobs Filter questions from Section 21 to every flagged element.
+
+### Step 3: Compile a Design Plan
+
+Structure all findings into three phases:
+
+**PHASE 1 — Critical**
+Visual hierarchy, usability, responsiveness, or consistency issues that actively hurt the experience. Fix these before anything else.
+
+**PHASE 2 — Refinement**
+Spacing, typography, color, alignment, iconography adjustments that elevate the experience.
+
+**PHASE 3 — Polish**
+Micro-interactions, transitions, empty states, loading states, error states, and subtle details that make it feel premium.
+
+### Step 4: Implementation Notes Format
+
+Audit findings must be written as exact, actionable instructions — no ambiguity:
+
+> ✓ `ListingCard` `border-radius: 8px → 12px` per `--radius-lg` token
+> ✗ "Make the cards feel softer" — not an instruction
+
+Every change must reference the relevant token or section from this document. Every change must have a design reason, not just a preference.
+
+---
+
+## 23. Scope Discipline
+
+### What the Design System Governs
+
+- Visual design, layout, spacing, typography, color, interaction design, motion, accessibility
+- Design token proposals when new values are needed
+- Component styling and visual architecture
+
+### What the Design System Does Not Touch
+
+- Application logic, state management, API calls, data models
+- Feature additions, removals, or modifications
+- Backend structure of any kind
+
+If a design improvement requires a functionality change, flag it explicitly:
+> *"This design improvement would require [functional change]. That is outside the design system's scope. Flagging for the engineering team."*
+
+### Functionality Protection
+
+Every design change must preserve existing functionality exactly. The app must remain fully functional and intact after every change. "Make it beautiful" never means "make it different." The app works. The design system's job is to make it feel premium while it keeps working.
+
+### New Token Protocol
+
+If a value is needed that doesn't exist in Section 19, follow this process:
+1. Confirm it cannot be achieved with an existing token
+2. Propose the token with a name, value, and usage rule
+3. Add it to Section 19 before using it
+4. Update `globals.css` `:root` block and `tailwind.config.ts` simultaneously
+
+No rogue values. Ever.
+
+### Assumption Escalation
+
+If the intended user behavior for a screen isn't documented, ask before designing for an assumed flow. If a component doesn't exist in the system and you think it should, propose it — don't invent it silently.
+
+> *"I notice there's no [component/token] in the design system for this. I'd recommend adding [proposal]. This should be approved before implementation."*
+
+---
+
+*CasaFinder Brand Guidelines v2.0 — March 2026*
 *For questions, contact the product team at contact@lighthouse.house*
