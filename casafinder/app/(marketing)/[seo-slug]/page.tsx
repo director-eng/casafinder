@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { createClient } from '@/lib/supabase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { ListingCard } from '@/components/listings/ListingCard'
 import { seoPageStructuredData } from '@/lib/seo/structured-data'
 import type { ListingWithImage, SeoPage } from '@/lib/supabase/types'
@@ -14,7 +14,7 @@ interface Props {
 
 export async function generateStaticParams() {
   try {
-    const supabase = await createClient()
+    const supabase = await createServiceClient()
     const { data } = await supabase.from('seo_pages').select('slug').eq('active', true)
     return ((data as { slug: string }[] | null) ?? []).map(p => ({ 'seo-slug': p.slug }))
   } catch {
@@ -25,7 +25,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { 'seo-slug': slug } = await params
-  const supabase = await createClient()
+  const supabase = await createServiceClient()
 
   const { data } = await supabase
     .from('seo_pages')
@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function SeoPage({ params }: Props) {
   const { 'seo-slug': slug } = await params
-  const supabase = await createClient()
+  const supabase = await createServiceClient()
 
   const { data: pageRaw } = await supabase
     .from('seo_pages')

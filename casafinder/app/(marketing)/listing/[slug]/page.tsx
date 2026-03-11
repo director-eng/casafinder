@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { createClient } from '@/lib/supabase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { ListingGallery } from '@/components/listings/ListingGallery'
 import { LeadForm } from '@/components/forms/LeadForm'
 import { ListingMap } from '@/components/map/ListingMap'
@@ -16,7 +16,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
-  const supabase = await createClient()
+  const supabase = await createServiceClient()
   const { data } = await supabase
     .from('listings')
     .select('title, title_en, description, district, province, price_usd, listing_images(url)')
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ListingPage({ params }: Props) {
   const { slug } = await params
-  const supabase = await createClient()
+  const supabase = await createServiceClient()
 
   const { data: listing } = await supabase
     .from('listings')

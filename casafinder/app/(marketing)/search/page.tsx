@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { createClient } from '@/lib/supabase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { ListingCard } from '@/components/listings/ListingCard'
 import { ListingFilters } from '@/components/listings/ListingFilters'
 import { SearchMap } from './SearchMap'
@@ -35,7 +35,7 @@ export default async function SearchPage({
   searchParams: Promise<SearchParams>
 }) {
   const params = await searchParams
-  const supabase = await createClient()
+  const supabase = await createServiceClient()
   const page = parseInt(params.page ?? '1')
   const view = params.view ?? 'list'
 
