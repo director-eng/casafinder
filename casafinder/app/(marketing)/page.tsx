@@ -219,7 +219,7 @@ export default async function HomePage() {
                   className="group block bg-white border border-[#E5E7EB] rounded-[12px] overflow-hidden shadow-[0_2px_4px_rgba(16,24,40,0.07)] hover:shadow-[0_4px_10px_rgba(16,24,40,0.10)] hover:scale-[1.01] transition-all duration-[180ms]"
                 >
                   {/* Photo */}
-                  <div className="aspect-[16/10] bg-[#F5F7FA] relative overflow-hidden">
+                  <div className="aspect-[16/10] bg-gradient-to-br from-[#d4e9d4] via-[#c8dfc0] to-[#a8c8a0] relative overflow-hidden">
                     {primaryImg ? (
                       <img
                         src={primaryImg.url}
@@ -229,8 +229,9 @@ export default async function HomePage() {
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center">
-                        <svg className="w-10 h-10 text-[#E5E7EB]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                        <svg className="w-12 h-12 text-white/40" viewBox="0 0 64 64" fill="currentColor">
+                          <path d="M32 4C20 4 10 14 10 26c0 8 4 15 10 19.5V52h4v8h16v-8h4V45.5C50 41 54 34 54 26 54 14 44 4 32 4z" opacity=".35" />
+                          <rect x="28" y="36" width="8" height="24" rx="2" opacity=".5" />
                         </svg>
                       </div>
                     )}
@@ -253,9 +254,12 @@ export default async function HomePage() {
                   {/* Details */}
                   <div className="p-4 pb-5">
                     <div className="text-[22px] font-bold text-[#1F2937] tabular-nums leading-tight mb-1">{price}</div>
-                    {facts && <div className="text-[13px] text-[#5B6472] mb-1">{facts}</div>}
-                    <div className="text-[13px] text-[#5B6472]">
-                      {[listing.district, listing.province].filter(Boolean).join(', ')}
+                    {facts && <div className="text-[13px] text-[#5B6472] mb-1.5">{facts}</div>}
+                    <div className="text-[13px] text-[#374151] font-medium leading-snug mb-1 line-clamp-1">
+                      {listing.title_en ?? listing.title}
+                    </div>
+                    <div className="text-[12px] text-[#9CA3AF]">
+                      {[listing.district, listing.province].filter(Boolean).join(', ')}, Costa Rica
                     </div>
                   </div>
                 </a>
@@ -302,46 +306,6 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* ── Explore by Region ─────────────────────────────────────────────── */}
-      <section className="bg-[#F5F7FA] border-y border-[#E5E7EB] py-20 px-6">
-        <div className="max-w-[1280px] mx-auto">
-          <div className="mb-10">
-            <p className="text-[12px] font-semibold text-[#0F5AE5] uppercase tracking-[0.1em] mb-2">Browse</p>
-            <h2 className="text-[2rem] font-bold text-[#1F2937] leading-tight">Explore by Region</h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {regions.map((region) => (
-              <a
-                key={region.name}
-                href={region.href}
-                className="group relative block rounded-[14px] overflow-hidden shadow-[0_2px_8px_rgba(16,24,40,0.08)] hover:shadow-[0_6px_20px_rgba(16,24,40,0.13)] hover:scale-[1.02] transition-all duration-[200ms]"
-              >
-                {/* Photo */}
-                <div className="aspect-[16/10] bg-[#E5E7EB] overflow-hidden">
-                  <img
-                    src={region.img}
-                    alt={region.name}
-                    className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-500"
-                    loading="lazy"
-                  />
-                </div>
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent" />
-                {/* Text */}
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <div className="text-[11px] font-semibold text-white/70 uppercase tracking-[0.08em] mb-1">{region.sub}</div>
-                  <div className="text-[18px] font-bold text-white leading-tight">{region.name}</div>
-                  <div className="mt-1.5 inline-block text-[11px] font-semibold text-white/80 bg-white/15 border border-white/25 px-2.5 py-0.5 rounded-full">
-                    {region.count}
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── Why the Southern Pacific ──────────────────────────────────────── */}
       <section className="max-w-[1280px] mx-auto px-6 py-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -371,10 +335,10 @@ export default async function HomePage() {
           {/* Right — stats */}
           <div className="grid grid-cols-2 gap-6">
             {[
-              { stat: '2h', label: 'From San José', detail: 'Via the Costanera Sur highway' },
-              { stat: '300+', label: 'Days of sun/year', detail: 'Dry season May – December' },
+              { stat: '300+', label: 'Days of sun/year', detail: 'Warm Pacific sunshine year-round' },
               { stat: '30+', label: 'Restaurants', detail: 'International cuisine in the jungle' },
               { stat: '50km', label: 'Of coastline', detail: 'Ballena National Marine Park' },
+              { stat: '312', label: 'Active listings', detail: 'Homes, land, and rentals' },
             ].map(({ stat, label, detail }) => (
               <div key={label} className="bg-white border border-[#E5E7EB] rounded-[16px] p-6">
                 <div className="text-[2.5rem] font-extrabold text-[#0F5AE5] leading-none mb-2">{stat}</div>

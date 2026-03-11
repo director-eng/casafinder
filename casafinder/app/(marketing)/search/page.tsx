@@ -85,40 +85,45 @@ export default async function SearchPage({
   const safeListings = (listings ?? []) as ListingWithImage[]
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-[#F5F7FA]">
       {/* Search header */}
-      <div className="bg-white border-b border-gray-200 px-4 py-4">
-        <div className="max-w-7xl mx-auto flex items-center gap-4 flex-wrap">
+      <div className="bg-white border-b border-[#E5E7EB] px-4 py-3 shadow-[0_1px_4px_rgba(16,24,40,0.06)]">
+        <div className="max-w-7xl mx-auto flex items-center gap-3 flex-wrap">
           {/* Search bar */}
           <form action="/search" className="flex gap-2 flex-1 min-w-64">
-            <input
-              type="text"
-              name="q"
-              defaultValue={params.q}
-              placeholder="Search Ojochal, Uvita, Dominical..."
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#0F5AE5]"
-            />
+            <div className="relative flex-1">
+              <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <circle cx="11" cy="11" r="7" /><path d="M21 21l-4.35-4.35" strokeLinecap="round" />
+              </svg>
+              <input
+                type="text"
+                name="q"
+                defaultValue={params.q}
+                placeholder="Search by location, property type…"
+                className="w-full pl-9 pr-4 py-2.5 border border-[#E5E7EB] rounded-[8px] text-[14px] text-[#1F2937] placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#0F5AE5] focus:border-transparent"
+              />
+            </div>
             <button
               type="submit"
-              className="px-4 py-2 bg-[#0F5AE5] hover:bg-[#0B4CC4] text-white text-sm font-semibold rounded-lg transition-colors"
+              className="px-5 py-2.5 bg-[#0F5AE5] hover:bg-[#0B4CC4] text-white text-[14px] font-semibold rounded-[8px] transition-colors whitespace-nowrap"
             >
               Search
             </button>
           </form>
 
           {/* View toggle */}
-          <div className="flex border border-gray-300 rounded-lg overflow-hidden">
+          <div className="flex border border-[#E5E7EB] rounded-[8px] overflow-hidden text-[13px] font-medium">
             <a
               href={`/search?${new URLSearchParams({ ...params as Record<string, string>, view: 'list' }).toString()}`}
-              className={`px-3 py-2 text-sm font-medium transition-colors ${view === 'list' ? 'bg-[#0F5AE5] text-white' : 'text-gray-600 hover:bg-gray-50'}`}
+              className={`px-4 py-2.5 transition-colors ${view === 'list' ? 'bg-[#0F5AE5] text-white' : 'text-[#5B6472] hover:bg-[#F5F7FA]'}`}
             >
-              ☰ List
+              List
             </a>
             <a
               href={`/search?${new URLSearchParams({ ...params as Record<string, string>, view: 'map' }).toString()}`}
-              className={`px-3 py-2 text-sm font-medium transition-colors ${view === 'map' ? 'bg-[#0F5AE5] text-white' : 'text-gray-600 hover:bg-gray-50'}`}
+              className={`px-4 py-2.5 border-l border-[#E5E7EB] transition-colors ${view === 'map' ? 'bg-[#0F5AE5] text-white' : 'text-[#5B6472] hover:bg-[#F5F7FA]'}`}
             >
-              ⊕ Map
+              Map
             </a>
           </div>
 
@@ -131,8 +136,8 @@ export default async function SearchPage({
           />
 
           {/* Result count */}
-          <span className="text-sm text-gray-500 ml-auto">
-            {count ?? 0} {count === 1 ? 'property' : 'properties'}
+          <span className="text-[13px] text-[#7A8494] font-medium ml-auto whitespace-nowrap">
+            {(count ?? 0).toLocaleString()} {count === 1 ? 'property' : 'properties'}
           </span>
         </div>
       </div>

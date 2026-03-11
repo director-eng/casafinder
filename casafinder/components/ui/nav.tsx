@@ -35,7 +35,7 @@ export function Nav() {
           {/* Logo */}
           <Link
             href="/"
-            className="font-extrabold text-[26px] text-[#1F2937] tracking-tight shrink-0"
+            className="font-black text-[32px] text-[#1F2937] tracking-tight shrink-0"
           >
             Casa<span className="text-[#0F5AE5]">Finder</span>
           </Link>

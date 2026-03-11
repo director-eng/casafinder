@@ -15,7 +15,7 @@ export function ListingCard({ listing, compact = false }: ListingCardProps) {
 
   const typeColor =
     listing.listing_type === 'sale' ? 'bg-[#0F5AE5]' :
-    listing.listing_type === 'rent' ? 'bg-blue-700' : 'bg-amber-600'
+    listing.listing_type === 'rent' ? 'bg-emerald-600' : 'bg-amber-500'
 
   const priceDisplay = () => {
     if (!listing.price_usd) return 'Price on Request'
@@ -28,65 +28,80 @@ export function ListingCard({ listing, compact = false }: ListingCardProps) {
   const specs = [
     listing.bedrooms ? `${listing.bedrooms} bd` : null,
     listing.bathrooms ? `${listing.bathrooms} ba` : null,
-    listing.area_construction_m2
-      ? `${listing.area_construction_m2.toLocaleString()} m²`
-      : listing.area_lot_m2
-        ? `${listing.area_lot_m2.toLocaleString()} m² lot`
-        : null,
+    (listing as any).area_built_m2
+      ? `${Number((listing as any).area_built_m2).toLocaleString()} m²`
+      : (listing as any).area_construction_m2
+        ? `${Number((listing as any).area_construction_m2).toLocaleString()} m²`
+        : (listing as any).area_lot_m2
+          ? `${Number((listing as any).area_lot_m2).toLocaleString()} m² lot`
+          : null,
   ].filter(Boolean)
+
+  // Short clean title — strip location noise after first comma if very long
+  const rawTitle = (listing as any).title_en ?? listing.title ?? ''
+  const displayTitle = rawTitle.length > 60 ? rawTitle.slice(0, 57) + '…' : rawTitle
+
+  const location = [listing.district, listing.province].filter(Boolean).join(', ')
 
   return (
     <Link
       href={`/listing/${listing.slug}`}
-      className={`listing-card block rounded-xl overflow-hidden border border-gray-100 bg-white hover:shadow-md transition-shadow ${compact ? '' : ''}`}
+      className="group block bg-white rounded-[12px] overflow-hidden border border-[#E5E7EB] shadow-[0_1px_4px_rgba(16,24,40,0.06)] hover:shadow-[0_6px_18px_rgba(16,24,40,0.11)] hover:scale-[1.01] transition-all duration-[180ms]"
     >
-      {/* Image */}
-      <div className={`relative bg-gray-100 ${compact ? 'aspect-[4/3]' : 'aspect-video'}`}>
+      {/* Image area */}
+      <div className={`relative overflow-hidden bg-gradient-to-br from-[#d4e9d4] via-[#c8dfc0] to-[#a8c8a0] ${compact ? 'aspect-[4/3]' : 'aspect-[16/10]'}`}>
         {primaryImage ? (
           <img
             src={primaryImage.url}
-            alt={primaryImage.alt_text ?? listing.title}
-            className="w-full h-full object-cover"
+            alt={primaryImage.alt_text ?? displayTitle}
+            className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-500"
+            loading="lazy"
           />
         ) : (
+          /* Placeholder — tropical green gradient with subtle palm icon */
           <div className="w-full h-full flex items-center justify-center">
-            <svg className="w-12 h-12 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-              <polyline strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} points="9,22 9,12 15,12 15,22" />
+            <svg className="w-14 h-14 text-white/40" viewBox="0 0 64 64" fill="currentColor">
+              <path d="M32 4C20 4 10 14 10 26c0 8 4 15 10 19.5V52h4v8h16v-8h4V45.5C50 41 54 34 54 26 54 14 44 4 32 4z" opacity=".35" />
+              <rect x="28" y="36" width="8" height="24" rx="2" opacity=".5" />
             </svg>
           </div>
         )}
 
         {/* Type badge */}
-        <span className={`absolute top-3 left-3 ${typeColor} text-white text-xs font-semibold px-2 py-1 rounded`}>
+        <span className={`absolute top-3 left-3 ${typeColor} text-white text-[11px] font-semibold px-2.5 py-1 rounded-[6px] tracking-[0.01em]`}>
           {typeLabel}
         </span>
 
         {/* Featured badge */}
         {listing.featured && (
-          <span className="absolute top-3 right-3 bg-amber-500 text-white text-xs font-semibold px-2 py-1 rounded">
+          <span className="absolute top-3 right-3 bg-amber-500 text-white text-[11px] font-semibold px-2.5 py-1 rounded-[6px]">
             Featured
           </span>
         )}
       </div>
 
-      {/* Info */}
-      <div className="p-4">
-        <h3 className={`font-semibold text-gray-900 mb-1 line-clamp-2 ${compact ? 'text-sm' : ''}`}>
-          {listing.title_en ?? listing.title}
-        </h3>
-        <p className="text-gray-500 text-sm mb-2 truncate">
-          {listing.district}, {listing.province}
-        </p>
-        <div className="flex items-center justify-between">
-          <span className="price-usd text-xl font-bold">
-            {priceDisplay()}
-          </span>
-          {specs.length > 0 && (
-            <span className="text-gray-400 text-sm">
-              {specs.join(' · ')}
-            </span>
-          )}
+      {/* Info — Zillow-style: price first */}
+      <div className="p-4 pb-5">
+        {/* Price — largest element */}
+        <div className="price-usd text-[22px] font-bold text-[#1F2937] tabular-nums leading-tight mb-1">
+          {priceDisplay()}
+        </div>
+
+        {/* Specs row */}
+        {specs.length > 0 && (
+          <div className="text-[13px] text-[#5B6472] mb-1.5">
+            {specs.join(' · ')}
+          </div>
+        )}
+
+        {/* Title */}
+        <div className={`text-[13px] text-[#374151] font-medium leading-snug mb-1 ${compact ? '' : 'line-clamp-1'}`}>
+          {displayTitle}
+        </div>
+
+        {/* Location */}
+        <div className="text-[12px] text-[#9CA3AF] truncate">
+          {location}, Costa Rica
         </div>
       </div>
     </Link>
