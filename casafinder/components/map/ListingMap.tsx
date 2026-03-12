@@ -15,6 +15,17 @@ interface ListingMapProps {
 export function ListingMap({ listing }: ListingMapProps) {
   if (!listing.lat || !listing.lng) return null
 
+  // Parse lot boundary GeoJSON if stored on the listing
+  let geojson: GeoJSON.Feature | null = null
+  if ((listing as any).boundary_geojson) {
+    try {
+      const raw = (listing as any).boundary_geojson
+      geojson = typeof raw === 'string' ? JSON.parse(raw) : raw
+    } catch {
+      // ignore malformed geojson
+    }
+  }
+
   return (
     <div className="h-72">
       <MapView
@@ -22,6 +33,7 @@ export function ListingMap({ listing }: ListingMapProps) {
         center={[listing.lat, listing.lng]}
         zoom={15}
         showSiriOverlay
+        geojson={geojson}
       />
     </div>
   )

@@ -10,6 +10,8 @@ interface MapViewProps {
   showSiriOverlay?: boolean
   onListingClick?: (listing: ListingWithImage) => void
   highlightedId?: string
+  /** Optional GeoJSON FeatureCollection or Feature to draw as a filled polygon overlay */
+  geojson?: GeoJSON.FeatureCollection | GeoJSON.Feature | null
 }
 
 // Ojochal default center
@@ -23,10 +25,12 @@ export function MapView({
   showSiriOverlay = false,
   onListingClick,
   highlightedId,
+  geojson,
 }: MapViewProps) {
   const mapRef = useRef<HTMLDivElement>(null)
   const mapInstanceRef = useRef<any>(null)
   const markersRef = useRef<any[]>([])
+  const geojsonLayerRef = useRef<any>(null)
 
   useEffect(() => {
     if (typeof window === 'undefined' || !mapRef.current) return
@@ -57,13 +61,13 @@ export function MapView({
         maxZoom: 19,
       }).addTo(map)
 
-      // SIRI WMS overlay (Costa Rica cadastre)
+      // SIRI WMS overlay (Costa Rica cadastre parcel boundaries)
       if (showSiriOverlay) {
         L.default.tileLayer.wms('/api/wms', {
-          layers: 'CATASTRO_PARCELAS',
+          layers: 'SIRI:catastro',
           format: 'image/png',
           transparent: true,
-          opacity: 0.5,
+          opacity: 0.45,
           version: '1.1.1',
           attribution: 'Catastro © SIRI Costa Rica',
         } as any).addTo(map)
@@ -114,6 +118,48 @@ export function MapView({
       })
     })
   }, [listings, highlightedId, onListingClick])
+
+  // Render GeoJSON polygon overlay (e.g., actual lot boundaries from user's GeoJSON file)
+  useEffect(() => {
+    if (!geojson) return
+
+    const addLayer = () => {
+      const map = mapInstanceRef.current
+      if (!map) {
+        // Map not ready yet — retry shortly
+        setTimeout(addLayer, 300)
+        return
+      }
+
+      import('leaflet').then((L) => {
+        // Remove any previous GeoJSON layer
+        if (geojsonLayerRef.current) {
+          geojsonLayerRef.current.remove()
+          geojsonLayerRef.current = null
+        }
+
+        const layer = L.default.geoJSON(geojson as any, {
+          style: {
+            color: '#1B6FEE',
+            fillColor: '#1B6FEE',
+            fillOpacity: 0.2,
+            weight: 2.5,
+            opacity: 0.9,
+          },
+        }).addTo(map)
+
+        geojsonLayerRef.current = layer
+
+        // Zoom to fit the polygon
+        const bounds = layer.getBounds()
+        if (bounds.isValid()) {
+          map.fitBounds(bounds, { padding: [40, 40] })
+        }
+      })
+    }
+
+    addLayer()
+  }, [geojson])
 
   return (
     <>

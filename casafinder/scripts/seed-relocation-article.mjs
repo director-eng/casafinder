@@ -78,15 +78,14 @@ const excerpt = `Everything I wish someone had told me before relocating to Cost
 
 const article = {
   slug: 'relocation-guide-costa-rica-southern-pacific',
-  title: 'Your Complete Relocation Guide to Costa Rica\'s Southern Pacific',
-  excerpt,
-  category: 'relocation',
-
-  reading_time_min: 9,
+  title: "Your Complete Relocation Guide to Costa Rica's Southern Pacific",
+  category: 'guide',
   body_html: bodyHtml.trim(),
+  excerpt,
   status: 'published',
   published_at: new Date().toISOString(),
   cover_image_url: 'https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1200&h=630&q=80',
+  reading_time_min: 9,
 }
 
 console.log('Inserting article:', article.title)
@@ -102,4 +101,4 @@ if (error) {
   process.exit(1)
 }
 
-console.log('✅ Article published:', data)
+console.log('✅ Article published! Status:', data?.status, '| URL: https://casafinder.co/how-to/' + data?.slug)
