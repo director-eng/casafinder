@@ -336,8 +336,8 @@ export default async function HomePage() {
           <div className="grid grid-cols-2 gap-6">
             {[
               { stat: '4h', label: 'From San José', detail: 'Via the Costanera Sur highway' },
-              { stat: '300+', label: 'Days of sun/year', detail: 'Warm Pacific sunshine year-round' },
-              { stat: '30+', label: 'Restaurants', detail: 'International cuisine in the jungle' },
+              { stat: '260', label: 'Days of sun/year', detail: 'Warm Pacific sunshine year-round' },
+              { stat: '26', label: 'Restaurants', detail: 'International cuisine in the jungle' },
               { stat: '50km', label: 'Of coastline', detail: 'Ballena National Marine Park' },
             ].map(({ stat, label, detail }) => (
               <div key={label} className="bg-white border border-[#E5E7EB] rounded-[16px] p-6">
