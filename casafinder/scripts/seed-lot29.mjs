@@ -183,20 +183,20 @@ const listing = {
   title_en: 'Lot 29 Plantel 3 — Ojochal, Southern Pacific',
   description: 'GPS-surveyed jungle lot in Ojochal, one of the Southern Pacific\'s most desirable villages. Clear title. Walking distance to international restaurants, local amenities, and Playa Tortuga. Ideal for residential construction.',
   listing_type: 'sale',
-  property_type: 'land',
+  property_type: 'lot',
   status: 'active',
   district: 'Ojochal',
-  canton: 'Osa',
   province: 'Puntarenas',
   lat: LAT,
   lng: LNG,
-  boundary_geojson: JSON.stringify(LOT29_GEOJSON),
+  boundary_geojson: LOT29_GEOJSON,
   price_usd: 185000,
   area_lot_m2: 1200,
 }
 
 console.log('Upserting Lot 29 Plantel 3 listing...')
 console.log(`  Location: ${LAT}, ${LNG}`)
+console.log(`  Property type: lot`)
 
 const { data, error } = await supabase
   .from('listings')

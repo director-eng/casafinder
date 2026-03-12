@@ -66,9 +66,8 @@ async function geocode(address) {
 // ── Build address string from listing fields ─────────────────────────────────
 function buildAddress(listing) {
   const parts = []
-  if (listing.district)   parts.push(listing.district)
-  if (listing.canton)     parts.push(listing.canton)
-  if (listing.province)   parts.push(listing.province)
+  if (listing.district) parts.push(listing.district)
+  if (listing.province) parts.push(listing.province)
   parts.push('Costa Rica')
   return parts.join(', ')
 }
@@ -79,7 +78,7 @@ async function main() {
 
   const { data: listings, error } = await supabase
     .from('listings')
-    .select('id, title_en, title, district, canton, province, lat, lng')
+    .select('id, title_en, title, district, province, lat, lng')
     .is('lat', null)
     .eq('status', 'active')
     .order('created_at', { ascending: true })
