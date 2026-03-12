@@ -19,14 +19,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const supabase = await createServiceClient()
   const { data } = await supabase
     .from('listings')
-    .select('title, title_en, description, district, province, price_usd, listing_images(url)')
+    .select('title, title_en, description, district, province, price_usd')
     .eq('slug', slug)
     .single()
 
   if (!data) return {}
 
   const title = data.title_en ?? data.title
-  const image = data.listing_images?.[0]?.url
+  const image = null // listing_images fetched separately in page component
 
   return {
     title: `${title} | CasaFinder`,
@@ -42,22 +42,36 @@ export default async function ListingPage({ params }: Props) {
   const { slug } = await params
   const supabase = await createServiceClient()
 
-  const { data: listing } = await supabase
+  // Fetch listing WITHOUT agents join — the join fails if the FK isn't registered
+  // in PostgREST, causing .single() to return null even with valid data
+  const { data: listing, error: listingError } = await supabase
     .from('listings')
-    .select('*, listing_images(url, alt_text, is_primary, sort_order), agents(full_name, phone, email, whatsapp, photo_url, agency_name)')
+    .select('*, listing_images(url, alt_text, is_primary, sort_order)')
     .eq('slug', slug)
     .eq('status', 'active')
     .single()
 
-  if (!listing) notFound()
+  if (!listing) {
+    console.error('[listing/page] notFound for slug:', slug, 'error:', listingError)
+    notFound()
+  }
+
+  // Separately fetch agent (safe — won't break the listing page if it fails)
+  let agent: any = null
+  if ((listing as any).agent_id) {
+    const { data: agentData } = await supabase
+      .from('agents')
+      .select('full_name, phone, email, whatsapp, photo_url, agency_name')
+      .eq('id', (listing as any).agent_id)
+      .single()
+    agent = agentData
+  }
 
   const images = (listing.listing_images ?? []).sort((a: any, b: any) => {
     if (a.is_primary) return -1
     if (b.is_primary) return 1
     return (a.sort_order ?? 99) - (b.sort_order ?? 99)
   })
-
-  const agent = (listing as any).agents
 
   const typeLabel =
     listing.listing_type === 'rent_vacation' ? 'Vacation Rental' :
