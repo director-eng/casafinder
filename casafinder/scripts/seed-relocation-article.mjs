@@ -101,4 +101,4 @@ if (error) {
   process.exit(1)
 }
 
-console.log('✅ Article published! Status:', data?.status, '| URL: https://casafinder.co/how-to/' + data?.slug)
+console.log('✅ Article upserted! Status:', data?.status, '| URL: https://casafinder.co/how-to/' + data?.slug)

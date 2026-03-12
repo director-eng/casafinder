@@ -39,7 +39,7 @@ try {
 
 const SUPABASE_URL = envVars.NEXT_PUBLIC_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL
 const SERVICE_KEY = envVars.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY
-const MAPS_KEY = envVars.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+const MAPS_KEY = envVars.GOOGLE_MAPS_API_KEY || envVars.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || process.env.GOOGLE_MAPS_API_KEY || process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
 
 if (!SUPABASE_URL || !SERVICE_KEY || !MAPS_KEY) {
   console.error('Missing required environment variables.')
