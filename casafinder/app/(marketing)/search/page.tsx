@@ -25,6 +25,9 @@ interface SearchParams {
   sort?: string
   view?: string
   page?: string
+  district?: string
+  canton?: string
+  province?: string
 }
 
 const PAGE_SIZE = 24
@@ -52,6 +55,11 @@ export default async function SearchPage({
   if (params.bedroomsMin) query = query.gte('bedrooms', parseInt(params.bedroomsMin))
   if (params.bathroomsMin) query = query.gte('bathrooms', parseFloat(params.bathroomsMin))
 
+  // Location filters (from nav links and region cards)
+  if (params.district) query = query.ilike('district', `%${params.district}%`)
+  if (params.canton) query = query.ilike('canton', `%${params.canton}%`)
+  if (params.province) query = query.ilike('province', `%${params.province}%`)
+
   // Feature flags
   const features = Array.isArray(params.features) ? params.features : params.features ? [params.features] : []
   if (features.includes('pool')) query = query.eq('pool', true)
@@ -59,9 +67,13 @@ export default async function SearchPage({
   if (features.includes('furnished')) query = query.eq('furnished', true)
   if (features.includes('ocean_view')) query = query.contains('tags', ['ocean_view'])
 
-  // Full text search
+  // Text search — searches title, description, district, address using ilike
+  // (does not require fts column — works out of the box)
   if (params.q) {
-    query = query.textSearch('fts', params.q, { type: 'websearch', config: 'english' })
+    const safe = params.q.replace(/[%_\\]/g, '\\$&')
+    query = query.or(
+      `title.ilike.%${safe}%,description.ilike.%${safe}%,district.ilike.%${safe}%,province.ilike.%${safe}%,address_text.ilike.%${safe}%`
+    )
   }
 
   // Sort

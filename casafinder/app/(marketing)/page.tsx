@@ -335,10 +335,10 @@ export default async function HomePage() {
           {/* Right — stats */}
           <div className="grid grid-cols-2 gap-6">
             {[
+              { stat: '4h', label: 'From San José', detail: 'Via the Costanera Sur highway' },
               { stat: '300+', label: 'Days of sun/year', detail: 'Warm Pacific sunshine year-round' },
               { stat: '30+', label: 'Restaurants', detail: 'International cuisine in the jungle' },
               { stat: '50km', label: 'Of coastline', detail: 'Ballena National Marine Park' },
-              { stat: '312', label: 'Active listings', detail: 'Homes, land, and rentals' },
             ].map(({ stat, label, detail }) => (
               <div key={label} className="bg-white border border-[#E5E7EB] rounded-[16px] p-6">
                 <div className="text-[2.5rem] font-extrabold text-[#0F5AE5] leading-none mb-2">{stat}</div>

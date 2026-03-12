@@ -30,12 +30,12 @@ export function Nav() {
             : 'border-[#E5E7EB]'}
         `}
       >
-        <div className="max-w-[1280px] mx-auto px-6 flex items-center justify-between h-[72px]">
+        <div className="max-w-[1280px] mx-auto px-6 flex items-center justify-between h-[76px]">
 
           {/* Logo */}
           <Link
             href="/"
-            className="font-black text-[32px] text-[#1F2937] tracking-tight shrink-0"
+            className="font-black text-[36px] text-[#1F2937] tracking-tight shrink-0"
           >
             Casa<span className="text-[#0F5AE5]">Finder</span>
           </Link>
@@ -52,7 +52,7 @@ export function Nav() {
               <Link
                 key={href}
                 href={href}
-                className="px-3.5 py-2 text-[15px] font-medium text-[#5B6472] hover:text-[#0F5AE5] rounded-[6px] hover:bg-[#F5F7FA] transition-all duration-[120ms]"
+                className="px-4 py-2 text-[16px] font-semibold text-[#374151] hover:text-[#0F5AE5] rounded-[6px] hover:bg-[#F5F7FA] transition-all duration-[120ms]"
               >
                 {label}
               </Link>
