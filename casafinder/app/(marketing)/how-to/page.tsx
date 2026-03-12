@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { createClient } from '@/lib/supabase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 
 export const dynamic = 'force-dynamic'
 
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 export default async function HowToIndexPage() {
-  const supabase = await createClient()
+  const supabase = await createServiceClient()
 
   const { data: articles } = await supabase
     .from('articles')
